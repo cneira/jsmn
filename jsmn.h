@@ -3,9 +3,6 @@
 
 #include <stddef.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /**
  * JSON type identifier. Basic types are:
@@ -35,7 +32,7 @@ enum jsmnerr {
  * JSON token description.
  * @param		type	type (object, array, string etc.)
  * @param		start	start position in JSON data string
- * @param		end		end position in JSON data string
+ * @param		end	end position in JSON data string
  */
 typedef struct {
 	jsmntype_t type;
@@ -57,20 +54,35 @@ typedef struct {
 	int toksuper; /* superior token node, e.g parent object or array */
 } jsmn_parser;
 
+class Jsmn {
+
 /**
  * Create JSON parser over an array of tokens
  */
-void jsmn_init(jsmn_parser *parser);
+
+ public:   
+static void jsmn_init(jsmn_parser *parser);
 
 /**
  * Run JSON parser. It parses a JSON data string into and array of tokens, each describing
  * a single JSON object.
  */
-int jsmn_parse(jsmn_parser *parser, const char *js, size_t len,
+static int jsmn_parse(jsmn_parser *parser, const char *js, size_t len,
 		jsmntok_t *tokens, unsigned int num_tokens);
 
-#ifdef __cplusplus
-}
-#endif
+static void   jsmn_fill_token(jsmntok_t *token, jsmntype_t type,
+                              int start, int end) ;
+
+static  int jsmn_parse_primitive(jsmn_parser *parser, const char *js,
+                         size_t len, jsmntok_t *tokens, size_t num_tokens) ;
+static int jsmn_parse_string(jsmn_parser *parser, const char *js,
+                          size_t len, jsmntok_t *tokens, size_t num_tokens);
+
+static jsmntok_t* jsmn_alloc_token(jsmn_parser *parser,
+                                   jsmntok_t *tokens,
+                                   size_t num_tokens) ;
+
+ 
+};
 
 #endif /* __JSMN_H_ */
