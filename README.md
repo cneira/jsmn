@@ -1,7 +1,27 @@
 
 JSMN
 ====
+This is the Port to Z/OS of this library, currently it is working for this types of jsons :
 
+{"user": "johndoe", "admin": false, "uid": 1000,  
+	"groups": ["users", "wheel", "audio", "video"]}
+Documentation must be updated as it has been migrated to C++.
+
+Features
+--------
+
+* compatible with C89
+* no dependencies (even libc!)
+* highly portable (tested on x86/amd64, ARM, AVR)
+* about 200 lines of code
+* extremely small code footprint
+* API contains only 2 functions
+* no dynamic memory allocation
+* incremental single-pass parsing
+* library code is covered with unit-tests
+* #Runs in Z/OS 
+
+Original Project : 
 jsmn (pronounced like 'jasmine') is a minimalistic JSON parser in C.  It can be
 easily integrated into resource-limited or embedded projects.
 
@@ -40,6 +60,7 @@ Features
 * no dynamic memory allocation
 * incremental single-pass parsing
 * library code is covered with unit-tests
+* Runs in Z/OS 
 
 Design
 ------
