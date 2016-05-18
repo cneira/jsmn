@@ -51,11 +51,11 @@ int Jsmn::jsmn_parse_primitive(jsmn_parser *parser, const char *js,
     case ':':
 #endif
     case '\t' : case '\r' : case '\n' : case ' ' :
-    case ','  : case ']'  : case '}' :
+    case ','  : case ']'  : case 208 :
       goto found;
     }
-    if (js[parser->pos] < 32 ||
-        js[parser->pos] >= 127) {
+    if (js[parser->pos] < 40 ||
+        js[parser->pos] >= 250) {
       parser->pos = start;
       return JSMN_ERROR_INVAL;
     }
@@ -178,7 +178,7 @@ int Jsmn::jsmn_parse(jsmn_parser *parser, const char *js, size_t len,
 
     c = js[parser->pos];
     switch (c) {
-    case '{': case '[':
+    case 192: case '[':
       count++;
       if (tokens == NULL) {
         break;
@@ -192,11 +192,11 @@ int Jsmn::jsmn_parse(jsmn_parser *parser, const char *js, size_t len,
         token->parent = parser->toksuper;
 #endif
       }
-      token->type = (c == '{' ? JSMN_OBJECT : JSMN_ARRAY);
+      token->type = (c == 192 ? JSMN_OBJECT : JSMN_ARRAY);
       token->start = parser->pos;
       parser->toksuper = parser->toknext - 1;
       break;
-    case '}': case ']':
+    case 208 : case ']':
       if (tokens == NULL)
         break;
       type = (c == '}' ? JSMN_OBJECT : JSMN_ARRAY);
@@ -330,4 +330,3 @@ void Jsmn::jsmn_init(jsmn_parser *parser) {
   parser->toknext = 0;
   parser->toksuper = -1;
 }
-
