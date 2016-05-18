@@ -1,5 +1,5 @@
 
-JSMN
+JSMN/Zos
 ====
 This is the Port to Z/OS of this library, currently it is working for this types of jsons :
 
